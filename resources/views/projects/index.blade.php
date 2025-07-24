@@ -23,7 +23,7 @@
             <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 flex flex-col justify-between hover:shadow-md transition project-card">
                 <div>
                     <h2 class="text-xl font-semibold text-blue-700 mb-2 truncate">
-                        <a href="{{ route('projects.show', $proj->id) }}" class="hover:underline project-title">
+                        <a href="{{ route('projects.show', $proj->slug) }}" class="hover:underline project-title">
                             {{ $proj->name }}
                         </a>
                     </h2>

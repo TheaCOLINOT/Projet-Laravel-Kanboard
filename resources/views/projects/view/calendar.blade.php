@@ -155,7 +155,7 @@
             </button>
             <h3 class="text-lg font-semibold text-gray-900 mb-4">Créer une nouvelle tâche</h3>
             @if($project->columns->count() > 0)
-                <form method="POST" action="{{ route('tasks.store', ['project' => $project->id, 'column' => $project->columns->first()->id]) }}">
+                <form method="POST" action="{{ route('tasks.store', ['project' => $project->slug, 'column' => $project->columns->first()->id]) }}">
                     @csrf
                     <div class="mb-4">
                         <label for="title" class="block mb-1 font-medium text-gray-900">Titre</label>

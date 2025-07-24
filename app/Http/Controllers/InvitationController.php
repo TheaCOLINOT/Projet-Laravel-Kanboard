@@ -48,12 +48,18 @@ class InvitationController extends Controller
         if (!$invitation->receiver_id && auth()->check()) {
             $invitation->receiver_id = auth()->id();
         }
+        if ($invitation->status != 0) {
+            return redirect()->route('home')->with('error', 'Cette invitation a déjà été acceptée ou expirée.');
+        }
+        if(auth()->user()->projects->contains($invitation->project)) {
+            return redirect()->route('projects.show', $invitation->project)->with('info', 'Vous faites déjà partie de ce projet.');
+        }
 
         $invitation->status = 1;
         $invitation->save();
 
         $project = $invitation->project;
-        $project->users()->attach($invitation->receiver_id, ['role' => 3]);
+        $project->users()->attach($invitation->receiver_id, ['role' => 2]);
 
         return redirect()->route('projects.show', $project)->with('success', 'Vous avez rejoint le projet.');
     }

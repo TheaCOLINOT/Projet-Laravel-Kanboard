@@ -148,7 +148,7 @@
                         ✕
                     </button>
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Créer une tâche</h3>
-                    <form method="POST" action="{{ route('tasks.store', ['project' => $project->id, 'column' => $column->id]) }}">
+                    <form method="POST" action="{{ route('tasks.store', ['project' => $project->slug, 'column' => $column->id]) }}">
                         @csrf
 
                         <div class="mb-4">
@@ -193,7 +193,7 @@
             ✕
         </button>
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Créer une nouvelle colonne</h3>
-        <form method="POST" action="{{ route('columns.store', $project->id) }}">
+        <form method="POST" action="{{ route('columns.store', $project->slug) }}">
             @csrf
 
             <div class="mb-4">

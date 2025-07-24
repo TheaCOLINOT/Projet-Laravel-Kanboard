@@ -27,7 +27,7 @@
     </div>
     <div class="flex items-center gap-4">
         @if(isset($project))
-            <a href="{{ route('calendar.export', ['project' => optional($project)?->id]) }}" target="_blank" class="border border-gray-500 text-gray-500 px-4 py-2 rounded hover:bg-gray-600 hover:text-white transition duration-200 flex items-center">
+            <a href="{{ route('calendar.export', ['project' => optional($project)?->slug]) }}" target="_blank" class="border border-gray-500 text-gray-500 px-4 py-2 rounded hover:bg-gray-600 hover:text-white transition duration-200 flex items-center">
                 Exporter vers calendrier
             </a>
             <a href="#" data-modal-target="modalInviteUser" data-modal-toggle="modalInviteUser" class="border border-gray-500 text-gray-500 px-4 py-2 rounded hover:bg-gray-600 hover:text-white transition duration-200 flex items-center">
@@ -84,7 +84,7 @@
                     @endforeach
             </div>
             <hr class="border-gray-200 my-4">
-            <a href="{{route('projects.users', ['project' => optional($project)?->id])}}" class="inline-flex items-center gap-2 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-100 transition w-full">
+            <a href="{{route('projects.users', ['project' => optional($project)?->slug])}}" class="inline-flex items-center gap-2 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-100 transition w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h4l2 3h10v9H3V7z" />
                 </svg>
@@ -136,7 +136,7 @@ if (sidebarOverlay) {
                 </button>
                 <h3 class="text-xl font-semibold text-gray-900 mb-4">Inviter un utilisateur</h3>
 
-                <form method="POST" action="{{ route('projects.invite', optional($project)?->id) }}">
+                <form method="POST" action="{{ route('projects.invite', optional($project)?->slug) }}">
                     @csrf
                     <div class="mb-4">
                         <label for="invite_email" class="block text-sm font-medium text-gray-700">Email de l'utilisateur</label>
@@ -160,7 +160,7 @@ if (sidebarOverlay) {
                 </button>
                 <h3 class="text-xl font-semibold text-gray-900 mb-4">Modifier le projet</h3>
 
-                <form method="POST" action="{{ route('projects.update', optional($project)?->id) }}">
+                <form method="POST" action="{{ route('projects.update', optional($project)?->slug) }}">
                     @csrf
                     @method('PATCH')
                     <div class="mb-4">

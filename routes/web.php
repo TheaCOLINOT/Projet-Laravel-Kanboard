@@ -31,22 +31,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/profil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profil', [ProfileController::class, 'update'])->name('profile.update');
-    Route::get('/{project}', [ProjectController::class, 'show'])->name('projects.show');
-    Route::patch('/{project}/update', [ProjectController::class, 'update'])->name('projects.update');
-    Route::get('/{project}/kanban', [ProjectController::class, 'kanban'])->name('projects.kanban');
-    Route::get('/{project}/list', [TaskController::class, 'list'])->name('tasks.list');
-    Route::post('/{project}/{column}/tasks', [TaskController::class, 'store'])->name('tasks.store');
-    Route::post('/{project}/tasks', [TaskController::class, 'storeFromList'])->name('tasks.storeFromList');
-    Route::post('/{project}/invite', [ProjectController::class, 'invite'])->name('projects.invite');
-    Route::get('/{project}/users', [ProjectController::class, 'showUsers'])->name('projects.users');
+    Route::get('/{project}', [ProjectController::class, 'show'])->name('projects.show')->middleware('project.member');
+    Route::patch('/{project}/update', [ProjectController::class, 'update'])->name('projects.update')->middleware('project.member');
+    Route::get('/{project}/kanban', [ProjectController::class, 'kanban'])->name('projects.kanban')->middleware('project.member');
+    Route::get('/{project}/list', [TaskController::class, 'list'])->name('tasks.list')->middleware('project.member');
+    Route::post('/{project}/{column}/tasks', [TaskController::class, 'store'])->name('tasks.store')->middleware('project.member');
+    Route::post('/{project}/tasks', [TaskController::class, 'storeFromList'])->name('tasks.storeFromList')->middleware('project.member');
+    Route::post('/{project}/invite', [ProjectController::class, 'invite'])->name('projects.invite')->middleware('project.member');
+    Route::get('/{project}/users', [ProjectController::class, 'showUsers'])->name('projects.users')->middleware('project.member');
     Route::patch('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
     Route::delete('/tasks/{task}', [TaskController::class, 'delete'])->name('tasks.delete');
-    Route::post('/{project}/columns', [ColumnController::class, 'store'])->name('columns.store');
+    Route::post('/{project}/columns', [ColumnController::class, 'store'])->name('columns.store')->middleware('project.member');
     Route::post('/tasks/reorder', [TaskController::class, 'reorder'])->name('tasks.reorder');
-    Route::get('/{project}/calendar', [TaskController::class, 'calendar'])->name('projects.calendar');
-    Route::get('/calendar/{project}.ics', [CalendarExportController::class, 'export'])->name('calendar.export');
-    Route::get('/invitations/accept/{token}', [InvitationController::class, 'accept'])->name('invitations.accept');    
-    // Route::post('/invitations/{invitation}/refuse', [InvitationController::class, 'refuse'])->name('invitations.refuse');
+    Route::get('/{project}/calendar', [TaskController::class, 'calendar'])->name('projects.calendar')->middleware('project.member');
+    Route::get('/calendar/{project}.ics', [CalendarExportController::class, 'export'])->name('calendar.export')->middleware('project.member');
+    Route::get('/invitations/accept/{token}', [InvitationController::class, 'accept'])->name('invitations.accept');
 });
 
 

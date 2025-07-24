@@ -146,7 +146,7 @@
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Créer une tâche</h3>
                     {{-- <form method="POST" action="{{ route('tasks.store', $project->id) }}"> --}}
                     {{-- <form method="POST" action="{{ route('tasks.store', ['project' => $project->id, 'column' => 0]) }}"> --}}
-                    <form method="POST" action="{{ route('tasks.storeFromList', ['project' => $project->id]) }}">
+                    <form method="POST" action="{{ route('tasks.storeFromList', ['project' => $project->slug]) }}">
                         @csrf
 
                         <div class="mb-4">
