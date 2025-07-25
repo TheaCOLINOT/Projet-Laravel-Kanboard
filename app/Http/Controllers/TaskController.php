@@ -86,12 +86,7 @@ class TaskController extends Controller
         return back()->with('success', 'Task updated successfully.');
     }
 
-    // public function list(Project $project)
-    // {
-    //     $tasks = $project->tasks;
-    //     $users = $project->users;
-    //     return view('tasks.list', compact('tasks', 'project', 'users'));
-    // }
+
     public function list(Project $project)
     {
         session(['project_' . $project->id . '_view' => 'list']);
